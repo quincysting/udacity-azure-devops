@@ -1,0 +1,39 @@
+{
+    "mode": "all",
+    "displayName": "Deny all resources without a tag",
+    "description": "This policy denies the creation of resources that do not have tags.",
+    "policyRule": {
+        "if": {
+            "allof": [
+                {
+                    "field": "[concat('tags[', parameters('tagName'), ']')]",
+                    "exists": "false"
+                }
+            ]
+        },
+        "then": {
+            "effect": "deny"
+        }
+    }
+    ,
+    "parameters": {
+      "tagName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "webserver-env",
+          "description": "obligatory tag for all resources"
+        }
+      }
+    }
+}
+
+--rules "{ \"if\": { \"allOf\": [ \
+        { \"field\": \"[concat('tags[', parameters('tagName'), ']')]\", \"exists\": \"false\" }, \
+                        ] }, \"then\": { \"effect\": \"deny\" } }" \
+--params "{ \"tagName\": { \
+        \"type\": \"String\", \"metadata\": { \"description\": \
+            \"Obligatory of the tag for all resourcess\", \
+               \"displayName\": \"webserver-env\" } } }"
+               
+               az policy assignment create --policy tagPolicy -p "{ \"tagName\": \
+                { \"value\": \"webserver-env\" } }"
