@@ -1,0 +1,14 @@
+name: checkterraform
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Terraform Validate
+      run: |
+        make check_terraform
