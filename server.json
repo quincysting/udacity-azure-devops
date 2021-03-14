@@ -1,38 +1,37 @@
 {
-	"variables": {
-		"client_id": "8a891552-dfc0-4f1d-aa6d-52e9c7c68f16",
-		"client_secret": "8bd4a552-20f8-4ef4-9da3-14f86d800120",
-		"subscription_id": "3e7cc574-54b3-4cc2-ba4b-c2ba115c084e"
-	},
-	"builders": [{
-		"type": "azure-arm",
-		"client_id": "{{user `client_id`}}",
-		"client_secret": "{{user `client_secret`}}",
-		"tenant_id": "{{ user `tenant_id`}}",
-		"subscription_id": "{{user `subscription_id`}}",
-
-		"azure_tags": {
-			"webserver-env": "udacityProject"
-		},
-
-		"managed_image_resource_group_name": "uda-devops-resource",
-        "managed_image_name": "webserverPackerImage",
-        
-
-		"os_type": "Linux",
-		"image_publisher": "Canonical",
-		"image_offer": "UbuntuServer",
-		"image_sku": "18.04-LTS",
-	
-		"location": "East US",
-		"vm_size": "Standard_B1s"
-	}],
-	"provisioners": [{
-		"inline": [
-			"echo 'Hello, World!' > index.html",
-			"nohup busybox httpd -f -p 80 &"
-		],
-		"inline_shebang": "/bin/sh -x",
-		"type": "shell"
-	}]
+   "variables":{
+      "client_id":"b0026994-6bcb-4c75-8464-522574aa7805",
+      "client_secret":"ac6c4250-4a48-4cb8-a375-3aec5fac6777",
+      "subscription_id":"3e7cc574-54b3-4cc2-ba4b-c2ba115c084e"
+   },
+   "builders":[
+      {
+         "type":"azure-arm",
+         "client_id":"{{user `client_id`}}",
+         "client_secret":"{{user `client_secret`}}",
+         "tenant_id":"{{ user `tenant_id`}}",
+         "subscription_id":"{{user `subscription_id`}}",
+         "azure_tags":{
+            "webserver-env":"udacityProject"
+         },
+         "managed_image_resource_group_name":"uda-devops-resource",
+         "managed_image_name":"webserverPackerImage",
+         "os_type":"Linux",
+         "image_publisher":"Canonical",
+         "image_offer":"UbuntuServer",
+         "image_sku":"18.04-LTS",
+         "location":"East US",
+         "vm_size":"Standard_B1s"
+      }
+   ],
+   "provisioners":[
+      {
+         "inline":[
+            "echo 'Hello, World!' > index.html",
+            "nohup busybox httpd -f -p 80 &"
+         ],
+         "inline_shebang":"/bin/sh -x",
+         "type":"shell"
+      }
+   ]
 }
